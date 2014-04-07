@@ -1,22 +1,23 @@
 <?php
  chdir('../application');
  include 'model/database.php';
- foreach (glob('controller/*.php') as $controller)
- include $controller;
+ 
  $query = $_SERVER['QUERY_STRING'];
+ 
  $routes = array
  (
- '/^$/' => function($m) { control_new(); },
- '/^edit\/(\d+)$/' => function($m) { control_edit($m[1]); },
- '/^(\d+)$/' => function($m) { control_test($m[1]); },
- '/.*/' => function($m) { control_error('Hittade inte sidan.'); }
+   '/^$/'                => 'views/home.php.html',
+   '/^redigera\/(\d+)$/' => 'views/edit.php.html',
+   '/^run\/(\d+)$/'      => 'views/run.php.html',   
+   '/.*/'                => 'views/error.php.html',
  );
- foreach ($routes as $regex => $function)
+ 
+ foreach ($routes as $regex => $view)
  {
- if (preg_match($regex, $query, $matches))
- {
- $function($matches);
- break;
- }
+   if (preg_match($regex, $query, $matches))
+   {
+     include $view;
+     break;
+   }
  }
 ?>
