@@ -8,7 +8,7 @@
  (
    '/^$/'                => 'views/home.php.html',
    '/^redigera\/(\d+)$/' => 'views/edit.php.html',
-   '/^run\/(\d+)$/'      => 'views/run.php.html',   
+   '/^testa\/(\d+)$/'      => 'views/run.php.html',   
    '/.*/'                => 'views/error.php.html',
  );
  
